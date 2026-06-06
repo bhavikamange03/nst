@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import products from "../../data/product.js";
 import './ProductDetails.css'
+import AddToCartButton from '../../components/AddToCartButton/AddToCartButton'
 
 function ProductDetails() {
     const {id} = useParams();
@@ -62,10 +63,9 @@ function ProductDetails() {
                 <h2>₹{product.price}</h2>
 
                 <p>{product.description}</p>
-
-                <button>
-                Add To Cart
-                </button>
+                <div className="pd-actions">
+                    <AddToCartButton product={product} />
+                </div>
 
                 <button>
                 Wishlist

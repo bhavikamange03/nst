@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css"
+import { useCart } from '../../context/CartContext'
 
 function Navbar(){
     const isLoggedIn = false;
     const navigate = useNavigate();
+    const { totalCount } = useCart();
 
     const handleWishlistClick = (e) => {
         if (!isLoggedIn){
@@ -25,7 +27,7 @@ function Navbar(){
                 <Link to = "/products">Products</Link>
 
                 <Link to = "/wishlist" onClick={handleWishlistClick}> ❤️ Wishlist</Link>
-                <Link to = "/cart">🛒 Cart</Link>
+                <Link to = "/cart">🛒 Cart {totalCount > 0 && (<span className="cart-count">{totalCount}</span>)}</Link>
                 
                 {!isLoggedIn ? (
                     <>

@@ -1,0 +1,7 @@
+.add-to-cart-component { display: flex; flex-direction: column; }
+.add-to-cart-row { display: flex; gap: 8px; align-items: center; }
+.act-qty-input { width: 80px; padding: 6px 8px; }
+.act-add-btn { padding: 8px 12px; }
+.act-message { margin-top: 8px; font-size: 0.95rem; }
+.act-message.error { color: crimson; }
+.act-message.success { color: green; }

@@ -6,6 +6,7 @@ const products = [
     price: 1499,
     description:
       "Beautiful cotton kurti perfect for daily wear.",
+    stock: 5,
     images: [
       "https://picsum.photos/id/1011/600",
       "https://picsum.photos/id/1012/600",
@@ -19,6 +20,7 @@ const products = [
     price: 1999,
     description:
       "Traditional festive kurta with premium fabric.",
+    stock: 2,
     images: [
       "https://picsum.photos/id/1021/600",
       "https://picsum.photos/id/1022/600",
@@ -32,6 +34,7 @@ const products = [
     price: 4999,
     description:
       "Elegant silk saree for weddings and events.",
+    stock: 0,
     images: [
       "https://picsum.photos/id/1031/600",
       "https://picsum.photos/id/1032/600",

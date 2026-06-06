@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AddToCartButton from '../AddToCartButton/AddToCartButton'
 
 function ProductCard({product}){
     return (
@@ -15,7 +16,8 @@ function ProductCard({product}){
 
             <p>₹{product.price}</p>
 
-            <button>Add to cart</button>
+            <AddToCartButton product={product} initialQty={1} />
+
             <button>Wishlist</button>
         </div>
     )

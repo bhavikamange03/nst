@@ -80,3 +80,35 @@
 @media (max-width: 600px) {
   .nav-arrow { padding: 6px; }
 }
+
+/* Actions and add-to-cart styles moved from inline styles */
+.pd-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.pd-qty-input {
+  width: 80px;
+  padding: 6px 8px;
+}
+
+.add-to-cart-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-to-cart-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-message {
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+.add-message.error { color: crimson; }
+.add-message.success { color: green; }
