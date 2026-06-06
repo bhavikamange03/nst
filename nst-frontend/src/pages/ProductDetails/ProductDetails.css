@@ -83,10 +83,11 @@
 
 /* Actions and add-to-cart styles moved from inline styles */
 .pd-actions {
-  display: flex;
+  display: inline-flex;
   gap: 8px;
   align-items: center;
   margin-top: 12px;
+  vertical-align: middle;
 }
 
 .pd-qty-input {
@@ -112,3 +113,27 @@
 
 .add-message.error { color: crimson; }
 .add-message.success { color: green; }
+
+/* Wishlist button: keep inline with actions */
+.product-info > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 8px 12px;
+  margin-left: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .pd-actions,
+  .product-info > button {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+  }
+  .product-info > button { margin-top: 8px; }
+}

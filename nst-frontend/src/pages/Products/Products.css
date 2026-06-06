@@ -17,3 +17,50 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Basic card layout to keep items consistent in the grid */
+.products-grid .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: #fff;
+    text-align: center;
+}
+
+.products-grid .card img {
+    width: 100%;
+    max-width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.products-grid .card h3 { margin: 6px 0 0 0; font-size: 1.05rem; }
+.products-grid .card p { margin: 0; color: #333; }
+
+.products-grid .card .add-to-cart-component { width: 100%; display: flex; justify-content: center; }
+
+/* Actions (add-to-cart + wishlist) inline on product cards */
+.products-grid .card .card-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.products-grid .card .card-actions .add-to-cart-component { flex: 1; }
+.products-grid .card .card-actions .wishlist-btn {
+    white-space: nowrap;
+    margin-left: 12px;
+    height: 40px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #fff;
+    cursor: pointer;
+}

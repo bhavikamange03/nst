@@ -16,9 +16,10 @@ function ProductCard({product}){
 
             <p>₹{product.price}</p>
 
-            <AddToCartButton product={product} initialQty={1} />
-
-            <button>Wishlist</button>
+                        <div className="card-actions">
+                            <AddToCartButton product={product} initialQty={1} />
+                            <button className="wishlist-btn">Wishlist</button>
+                        </div>
         </div>
     )
 }   
