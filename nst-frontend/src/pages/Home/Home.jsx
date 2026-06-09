@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Home() {
   return (
     <>
@@ -7,9 +9,7 @@ function Home() {
         Premium Indian Ethnic & Casual Wear
       </p>
 
-      <button>
-        Shop Now
-      </button>
+      <Link to="/products" className="btn">Shop Now</Link>
     </>
   );
 }
