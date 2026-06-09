@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import products from "../../data/product.js";
 import './ProductDetails.css'
+import { useWishlist } from '../../context/WishlistContext'
 import AddToCartButton from '../../components/AddToCartButton/AddToCartButton'
 
 function ProductDetails() {
@@ -27,6 +28,8 @@ function ProductDetails() {
         const next = (idx + 1) % images.length;
         setSelectedImage(images[next]);
     }
+
+    const { toggle, isInWishlist } = useWishlist();
 
     return(
         <div className="product-details">
@@ -67,9 +70,9 @@ function ProductDetails() {
                     <AddToCartButton product={product} />
                 </div>
 
-                <button>
-                Wishlist
-                </button>
+                                <button className={`wishlist-btn ${isInWishlist(product) ? 'active' : ''}`} onClick={() => toggle(product)}>
+                                    {isInWishlist(product) ? '♥ In Wishlist' : '♡ Wishlist'}
+                                </button>
             </div>
         </div>
     );
