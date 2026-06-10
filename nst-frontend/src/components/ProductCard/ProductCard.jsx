@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import AddToCartButton from '../AddToCartButton/AddToCartButton'
 import { useWishlist } from '../../context/WishlistContext'
+import { useNavigate } from 'react-router-dom'
 
 function ProductCard({product}){
     const { toggle, isInWishlist } = useWishlist();
+    const navigate = useNavigate();
+    const isLoggedIn = false; // replace with real auth check
+
+    function handleWishlist(){
+        if (!isLoggedIn){
+            alert('Please login to add items to your wishlist');
+            navigate('/login');
+            return;
+        }
+        toggle(product);
+    }
 
     return (
         <div className="card">
@@ -21,7 +33,7 @@ function ProductCard({product}){
 
                         <div className="card-actions">
                             <AddToCartButton product={product} initialQty={1} />
-                            <button className={`wishlist-btn ${isInWishlist(product) ? 'active' : ''}`} onClick={() => toggle(product)}>
+                            <button className={`wishlist-btn ${isInWishlist(product) ? 'active' : ''}`} onClick={handleWishlist}>
                                 {isInWishlist(product) ? '♥ In Wishlist' : '♡ Wishlist'}
                             </button>
                         </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import products from "../../data/product.js";
 import './ProductDetails.css'
 import { useWishlist } from '../../context/WishlistContext'
+import { useNavigate } from 'react-router-dom'
 import AddToCartButton from '../../components/AddToCartButton/AddToCartButton'
 
 function ProductDetails() {
@@ -30,6 +31,17 @@ function ProductDetails() {
     }
 
     const { toggle, isInWishlist } = useWishlist();
+    const navigate = useNavigate();
+    const isLoggedIn = false; // replace with real auth check
+
+    const handleWishlist = () => {
+        if (!isLoggedIn){
+            alert('Please login to add items to your wishlist');
+            navigate('/login');
+            return;
+        }
+        toggle(product);
+    }
 
     return(
         <div className="product-details">
@@ -70,7 +82,7 @@ function ProductDetails() {
                     <AddToCartButton product={product} />
                 </div>
 
-                                <button className={`wishlist-btn ${isInWishlist(product) ? 'active' : ''}`} onClick={() => toggle(product)}>
+                                <button className={`wishlist-btn ${isInWishlist(product) ? 'active' : ''}`} onClick={handleWishlist}>
                                     {isInWishlist(product) ? '♥ In Wishlist' : '♡ Wishlist'}
                                 </button>
             </div>
