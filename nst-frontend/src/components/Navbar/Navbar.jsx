@@ -2,9 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css"
 import { useCart } from '../../context/CartContext'
 import { useWishlist } from '../../context/WishlistContext'
+import { useAuth } from '../../context/AuthContext'
 
 function Navbar(){
-    const isLoggedIn = false;
+    const { isLoggedIn, isAdmin, logout } = useAuth();
     const navigate = useNavigate();
     const { totalCount } = useCart();
     const { count: wishlistCount } = useWishlist();
@@ -40,7 +41,8 @@ function Navbar(){
                     <>
                     <Link to = "/profile"> Profile</Link>
                     <Link to = "/orders">My Orders</Link>
-                    <Link to = "/logout">Logout</Link>
+                    {isAdmin && (<Link to="/admin">Admin</Link>)}
+                    <a href="#" onClick={(e) => { e.preventDefault(); logout(); }}>Logout</a>
                     </>
                 )}
 

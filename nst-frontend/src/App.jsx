@@ -3,25 +3,28 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { CartProvider } from './context/CartContext'
 import { WishlistProvider } from './context/WishlistContext'
+import { AuthProvider } from './context/AuthContext'
 
 function App(){
   return (
-    <CartProvider>
-      <WishlistProvider>
-        <Navbar/>
+    <AuthProvider>
+      <CartProvider>
+        <WishlistProvider>
+          <Navbar/>
 
-        <main 
-          style={{
-            minHeight : "80vh",
-            padding: "20px"
-          }}
-          >
-          <AppRoutes/>
-        </main>
+          <main 
+            style={{
+              minHeight : "80vh",
+              padding: "20px"
+            }}
+            >
+            <AppRoutes/>
+          </main>
 
-        <Footer/>
-      </WishlistProvider>
-    </CartProvider>
+          <Footer/>
+        </WishlistProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
