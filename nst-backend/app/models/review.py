@@ -1,4 +1,8 @@
 from sqlalchemy import ForeignKey, Integer, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.database.base import Base, TimestampMixin
+
 
 class Review(Base, TimestampMixin):
     __tablename__ = "reviews"

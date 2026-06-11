@@ -1,4 +1,8 @@
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.database.base import Base, TimestampMixin
+
 
 class Cart(Base, TimestampMixin):
     __tablename__ = "carts"
@@ -8,7 +12,8 @@ class Cart(Base, TimestampMixin):
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id"),
         unique=True,
-        index = True
+        index=True,
+        nullable=False,
     )
 
     items = relationship(

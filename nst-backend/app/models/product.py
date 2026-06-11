@@ -1,4 +1,8 @@
-from sqlalchemy import ForeignKey, Float, String, Text
+from sqlalchemy import ForeignKey, Float, String, Text, Boolean
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.database.base import Base, TimestampMixin
+
 
 class Product(Base, TimestampMixin):
     __tablename__ = "products"
@@ -36,4 +40,4 @@ class Product(Base, TimestampMixin):
         back_populates="product"
     )
 
-    is_active: Mapped[bool] = mapped_column(default=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
