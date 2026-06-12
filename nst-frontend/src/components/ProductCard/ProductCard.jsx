@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import AddToCartButton from '../AddToCartButton/AddToCartButton'
 import { useWishlist } from '../../context/WishlistContext'
+import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 function ProductCard({product}){
     const { toggle, isInWishlist } = useWishlist();
     const navigate = useNavigate();
-    const isLoggedIn = false; // replace with real auth check
+    const { isLoggedIn } = useAuth();
 
     function handleWishlist(){
         if (!isLoggedIn){

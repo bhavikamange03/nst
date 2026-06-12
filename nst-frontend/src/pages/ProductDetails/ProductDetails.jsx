@@ -5,6 +5,7 @@ import './ProductDetails.css'
 import { useWishlist } from '../../context/WishlistContext'
 import { useNavigate } from 'react-router-dom'
 import AddToCartButton from '../../components/AddToCartButton/AddToCartButton'
+import { useAuth } from '../../context/AuthContext'
 
 function ProductDetails() {
     const {id} = useParams();
@@ -32,7 +33,7 @@ function ProductDetails() {
 
     const { toggle, isInWishlist } = useWishlist();
     const navigate = useNavigate();
-    const isLoggedIn = false; // replace with real auth check
+    const { isLoggedIn } = useAuth();
 
     const handleWishlist = () => {
         if (!isLoggedIn){
