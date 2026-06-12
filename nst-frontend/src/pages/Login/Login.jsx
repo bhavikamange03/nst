@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 
+import './Login.css'
+
 function Login(){
     const { login } = useAuth()
     const navigate = useNavigate()
@@ -21,9 +23,9 @@ function Login(){
     }
 
     return ( 
-        <div>
+        <div className="login-page">
             <h1> Login </h1>
-            {error && <div style={{color:'red'}}>{error}</div>}
+            {error && <div className="login-error">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="email"/>
                 <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="password"/>

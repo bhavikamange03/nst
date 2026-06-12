@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import products from '../data/product.js';
+import { useAuth } from './AuthContext'
 
 const WishlistContext = createContext();
 
@@ -9,6 +10,12 @@ export function useWishlist(){
 
 export function WishlistProvider({ children }){
   const [items, setItems] = useState([]); // store product ids
+  const { isLoggedIn } = useAuth();
+
+  // clear wishlist when user logs out
+  useEffect(() => {
+    if (!isLoggedIn) setItems([]);
+  }, [isLoggedIn]);
 
   function add(product){
     if (items.includes(product.id)) return;

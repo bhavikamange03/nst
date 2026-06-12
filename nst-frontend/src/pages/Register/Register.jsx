@@ -3,6 +3,8 @@ import axios from '../../api/axios'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 
+import './Register.css'
+
 function Register() {
   const { login } = useAuth()
   const navigate = useNavigate()
@@ -61,11 +63,11 @@ function Register() {
   }
 
   return (
-    <div>
+    <div className="register-page">
       <h1>Register</h1>
-      {error && <div style={{color:'red'}}>{error}</div>}
+      {error && <div className="register-error">{error}</div>}
       <form onSubmit={handleSubmit}>
-        <input name="name" value={form.name} onChange={handleChange} type="text" placeholder="Name" />
+        <input className="full" name="name" value={form.name} onChange={handleChange} type="text" placeholder="Name" />
         <input name="email" value={form.email} onChange={handleChange} type="email" placeholder="Email" />
         <input name="password" value={form.password} onChange={handleChange} type="password" placeholder="Password" />
         <input name="confirm" value={form.confirm} onChange={handleChange} type="password" placeholder="Confirm Password" />
@@ -73,7 +75,7 @@ function Register() {
         <h3>Address (optional)</h3>
         <input name="address.first_name" value={form.address.first_name} onChange={handleChange} placeholder="First name" />
         <input name="address.last_name" value={form.address.last_name} onChange={handleChange} placeholder="Last name" />
-        <input name="address.street" value={form.address.street} onChange={handleChange} placeholder="Street" />
+        <input className="full" name="address.street" value={form.address.street} onChange={handleChange} placeholder="Street" />
         <input name="address.city" value={form.address.city} onChange={handleChange} placeholder="City" />
         <input name="address.state" value={form.address.state} onChange={handleChange} placeholder="State" />
         <input name="address.zip_code" value={form.address.zip_code} onChange={handleChange} placeholder="Zip code" />

@@ -1,0 +1,22 @@
+/* Simple, responsive form styles for Register page */
+.register-page{
+  max-width:720px;
+  margin:32px auto;
+  padding:24px;
+  background:#fff;
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(15,15,15,0.06);
+}
+.register-page h1{margin:0 0 16px;font-size:24px}
+.register-page form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.register-page form h3{grid-column:1/-1;margin-top:12px}
+.register-page input{padding:10px 12px;border:1px solid #ddd;border-radius:6px;background:#fafafa}
+.register-page input:focus{outline:none;border-color:#7c5cff;background:#fff}
+.register-page .full{grid-column:1/-1}
+.register-page button{grid-column:1/-1;margin-top:8px;background:#7c5cff;color:#fff;border:none;padding:10px 14px;border-radius:6px;cursor:pointer}
+.register-error{color:#b00020;margin-bottom:8px}
+
+@media (max-width:640px){
+  .register-page{margin:12px;padding:16px}
+  .register-page form{grid-template-columns:1fr}
+}
