@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
+from typing import Optional
 from sqlalchemy.orm import Session
 from app.database.session import get_db
 from app.models.user import User
@@ -17,10 +18,22 @@ def read_current_user(current_user: User = Depends(get_current_user)):
 
 
 
+class AddressCreate(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    street: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    zip_code: Optional[str] = None
+    country: Optional[str] = None
+    phone: Optional[str] = None
+
+
 class UserCreate(BaseModel):
     name: str
     email: EmailStr
     password: str
+    address: Optional[AddressCreate] = None
 
 
 class UserOut(BaseModel):
@@ -41,6 +54,30 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     db.add(user)
     db.commit()
     db.refresh(user)
+
+    # create address if provided
+    if user_in.address:
+        try:
+            from app.models.address import Address
+
+            addr_in = user_in.address
+            addr = Address(
+                user_id=user.id,
+                first_name=addr_in.first_name,
+                last_name=addr_in.last_name,
+                street=addr_in.street,
+                city=addr_in.city,
+                state=addr_in.state,
+                zip_code=addr_in.zip_code,
+                country=addr_in.country,
+                phone=addr_in.phone,
+            )
+            db.add(addr)
+            db.commit()
+        except Exception:
+            # don't fail registration if optional address creation fails
+            db.rollback()
+
     return user
 
 
