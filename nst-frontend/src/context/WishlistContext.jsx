@@ -9,13 +9,27 @@ export function useWishlist(){
 }
 
 export function WishlistProvider({ children }){
-  const [items, setItems] = useState([]); // store product ids
+  const [items, setItems] = useState(() => {
+    // Load wishlist from localStorage on mount
+    try {
+      const saved = localStorage.getItem('wishlist');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
   const { isLoggedIn } = useAuth();
 
-  // clear wishlist when user logs out
+  // Save wishlist to localStorage whenever it changes
   useEffect(() => {
-    if (!isLoggedIn) setItems([]);
-  }, [isLoggedIn]);
+    localStorage.setItem('wishlist', JSON.stringify(items));
+  }, [items]);
+
+  // Optionally clear wishlist on logout (remove this if you want it to persist)
+  // Commented out to keep wishlist after logout
+  // useEffect(() => {
+  //   if (!isLoggedIn) setItems([]);
+  // }, [isLoggedIn]);
 
   function add(product){
     if (items.includes(product.id)) return;

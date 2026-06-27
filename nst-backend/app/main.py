@@ -22,15 +22,19 @@ from app.models.review import Review
 from app.routers import auth
 from app.routers import admin
 
-# Create tables
-Base.metadata.create_all(bind=engine)
+# Create tables (wrapped for safety)
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Warning: Could not create tables: {e}")
+    print("Continuing anyway - tables may not exist yet")
 
 app = FastAPI()
 
-# Enable CORS for frontend during development
+# Enable CORS FIRST (must be before routers)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
