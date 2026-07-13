@@ -23,6 +23,11 @@ export function CartProvider({ children }) {
     0
   );
 
+  function clearCart() {
+    setCartItems([]);
+    setInventory(initialInventory);
+  }
+
   function addToCart(product, qty) {
     const available = inventory[product.id] ?? 0;
 
@@ -172,7 +177,8 @@ export function CartProvider({ children }) {
     totalCount,
     addToCart,
     removeFromCart,
-    updateQuantity
+    updateQuantity,
+    clearCart
   };
 
   return (

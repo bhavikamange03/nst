@@ -22,6 +22,7 @@ from app.models.review import Review
 from app.routers import auth
 from app.routers import admin
 from app.routers import wishlist
+from app.routers import orders
 
 # Create tables (wrapped for safety)
 try:
@@ -44,6 +45,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(admin.router)
 app.include_router(wishlist.router)
+app.include_router(orders.router)
 
 @app.get("/")
 def root():

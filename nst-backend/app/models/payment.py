@@ -23,4 +23,7 @@ class Payment(Base, TimestampMixin):
 
     payment_method: Mapped[str] = mapped_column(String(50))
 
-    order = relationship("Order")
+    order = relationship(
+        "Order",
+        back_populates="payment"
+    )

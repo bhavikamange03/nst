@@ -1,0 +1,47 @@
+.order-detail-page{
+  max-width:840px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.order-detail-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 16px;
+  border:1px solid #e5e5e5;
+  border-radius:10px;
+  background:#fafafa;
+}
+
+.order-detail-section{
+  border:1px solid #e5e5e5;
+  border-radius:10px;
+  padding:18px;
+  background:#fff;
+}
+
+.order-detail-items{
+  display:grid;
+  gap:12px;
+}
+
+.order-detail-item{
+  display:grid;
+  gap:6px;
+  padding:12px;
+  border:1px solid #f0f0f0;
+  border-radius:8px;
+  background:#f9f9f9;
+}
+
+.order-detail-payment{
+  display:grid;
+  gap:8px;
+}
+
+.order-detail-error{
+  color:#c33;
+}

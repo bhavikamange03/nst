@@ -4,6 +4,9 @@ import Products from "../pages/Products/Products";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Wishlist from "../pages/Wishlist/Wishlist";
 import Cart from "../pages/Cart/Cart";
+import Checkout from "../pages/Checkout/Checkout";
+import Orders from "../pages/Orders/Orders";
+import OrderDetail from "../pages/Orders/OrderDetail";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import AdminUsers from "../pages/Admin/Users";
@@ -21,6 +24,9 @@ function AppRoutes(){
             <Route path="/products/:id" element = {<ProductDetails/>}/>
             <Route path="/wishlist" element = {<Wishlist/>} />
             <Route path="/cart" element = {<Cart/>} />
+            <Route path="/checkout" element = {<Checkout/>} />
+            <Route path="/orders" element = {<Orders/>} />
+            <Route path="/orders/:id" element = {<OrderDetail/>} />
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Register />} />
             <Route path="/admin" element={isAdmin ? <AdminUsers/> : <Navigate to="/login" replace />} />
