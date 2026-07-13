@@ -1,43 +1,79 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from '../api/axios';
 import products from '../data/product.js';
 import { useAuth } from './AuthContext'
 
 const WishlistContext = createContext();
+
+function loadLocalWishlist(){
+  try {
+    const saved = localStorage.getItem('wishlist');
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+}
 
 export function useWishlist(){
   return useContext(WishlistContext);
 }
 
 export function WishlistProvider({ children }){
-  const [items, setItems] = useState(() => {
-    // Load wishlist from localStorage on mount
-    try {
-      const saved = localStorage.getItem('wishlist');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [items, setItems] = useState(loadLocalWishlist);
   const { isLoggedIn } = useAuth();
 
-  // Save wishlist to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('wishlist', JSON.stringify(items));
   }, [items]);
 
-  // Optionally clear wishlist on logout (remove this if you want it to persist)
-  // Commented out to keep wishlist after logout
-  // useEffect(() => {
-  //   if (!isLoggedIn) setItems([]);
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setItems([]);
+      localStorage.removeItem('wishlist');
+      return;
+    }
 
-  function add(product){
+    async function syncWishlist() {
+      const localItems = loadLocalWishlist();
+      try {
+        const response = await axios.get('/wishlist/');
+        const serverItems = response.data || [];
+        const merged = Array.from(new Set([...serverItems, ...localItems]));
+
+        const toAdd = localItems.filter(id => !serverItems.includes(id));
+        await Promise.all(toAdd.map(id => axios.post('/wishlist/', { product_id: id })));
+        setItems(merged);
+      } catch (error) {
+        console.error('Failed to sync wishlist:', error);
+      }
+    }
+
+    syncWishlist();
+  }, [isLoggedIn]);
+
+  async function add(product){
     if (items.includes(product.id)) return;
     setItems(prev => [...prev, product.id]);
+
+    if (isLoggedIn) {
+      try {
+        await axios.post('/wishlist/', { product_id: product.id });
+      } catch (error) {
+        console.error('Failed to add wishlist item:', error);
+      }
+    }
   }
 
-  function remove(product){
+  async function remove(product){
     setItems(prev => prev.filter(id => id !== product.id));
+
+    if (isLoggedIn) {
+      try {
+        await axios.delete(`/wishlist/${product.id}`);
+      } catch (error) {
+        console.error('Failed to remove wishlist item:', error);
+      }
+    }
   }
 
   function toggle(product){

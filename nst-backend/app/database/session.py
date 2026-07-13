@@ -2,7 +2,8 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-# Use SQLite for development; set DATABASE_URL env var for PostgreSQL
+# Use SQLite for development; set DATABASE_URL env var for PostgreSQL:
+#   export DATABASE_URL="postgresql://user:password@localhost:5432/nst"
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./nst.db")
 
 engine = create_engine(
